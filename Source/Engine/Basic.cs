@@ -16,31 +16,26 @@ namespace GameProject
 {
     public class Basic
     {
-        public Vector2 pos, dims, startDrawPos;
+        public Vector2 pos;
         public Texture2D texture;
         public Rectangle rectangle;
-        public Basic(string path, Vector2 pos, Vector2 dims)
+        public Basic(string path, Vector2 pos)
         {
             this.pos = pos;
-            this.dims = dims;
 
             texture = Globals.content.Load<Texture2D>(path);
 
-            rectangle = new Rectangle((int)pos.X, (int)pos.Y, (int)dims.X, (int)dims.Y);
-            startDrawPos = new Vector2(texture.Bounds.Width / 2, texture.Bounds.Height / 2);
+            rectangle = new Rectangle((int)pos.X, (int)pos.Y, texture.Width, texture.Height);
         }
         public virtual void Update()
         {
-
+            rectangle = new Rectangle((int)pos.X, (int)pos.Y, texture.Width, texture.Height);
         }
 
         public virtual void Draw()
         {
             if (texture != null)
-                Globals.spriteBatch.Draw(texture, new Rectangle((int)pos.X, (int)pos.Y, (int)dims.X, (int)dims.Y), 
-                                         null, Color.White, 0.0f, 
-                                         new Vector2(texture.Bounds.Width / 2, texture.Bounds.Height / 2), 
-                                         new SpriteEffects(), 0);
+                Globals.spriteBatch.Draw(texture, pos, Color.White);
         }
     }
 }

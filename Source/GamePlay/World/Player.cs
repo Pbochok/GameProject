@@ -17,10 +17,17 @@ namespace GameProject
     public class Player : Basic
     {
         public int speed = 2;
+        public bool isTouchBottom;
+        public bool isTouchTop;
+        public bool isTouchRight;
+        public bool isTouchLeft;
 
-        public Player(string path, Vector2 pos, Vector2 dims) : base(path, pos, dims)
+        public Player(string path, Vector2 pos) : base(path, pos)
         {
-
+            isTouchBottom = false;
+            isTouchTop = false;
+            isTouchRight = false;
+            isTouchLeft = false;
         }
 
         public override void Update()
@@ -37,13 +44,13 @@ namespace GameProject
 
         private void PlayerMovement()
         {
-            if (Keyboard.GetState().IsKeyDown(Keys.A))
+            if (Keyboard.GetState().IsKeyDown(Keys.A) && !isTouchLeft)
                 pos = new Vector2(pos.X - speed, pos.Y);
-            if (Keyboard.GetState().IsKeyDown(Keys.D))
+            if (Keyboard.GetState().IsKeyDown(Keys.D) && !isTouchRight)
                 pos = new Vector2(pos.X + speed, pos.Y);
-            if (Keyboard.GetState().IsKeyDown(Keys.W))
+            if (Keyboard.GetState().IsKeyDown(Keys.W) && !isTouchTop)
                 pos = new Vector2(pos.X, pos.Y - speed);
-            if (Keyboard.GetState().IsKeyDown(Keys.S))
+            if (Keyboard.GetState().IsKeyDown(Keys.S) && !isTouchBottom)
                 pos = new Vector2(pos.X, pos.Y + speed);
         }
     }

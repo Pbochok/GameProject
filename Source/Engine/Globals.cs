@@ -8,6 +8,5 @@ namespace GameProject
     {
         public static ContentManager content;
         public static SpriteBatch spriteBatch;
-
     }
 }
