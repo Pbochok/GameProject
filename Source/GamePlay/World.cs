@@ -31,7 +31,7 @@ namespace GameProject
             foreach (var wall in walls)
             {
                 wall.Update();
-                CheckTouching(wall);
+                CheckPlayerTouching(wall);
             }
             player.Update();
         }
@@ -43,7 +43,7 @@ namespace GameProject
             player.Draw();
         }
 
-        private void CheckTouching(Wall wall)
+        private void CheckPlayerTouching(Wall wall)
         {
             player.isTouchRight = player.rectangle.Right + player.speed > wall.rectangle.Left &&
                 player.rectangle.Left < wall.rectangle.Left &&
