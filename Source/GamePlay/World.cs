@@ -16,54 +16,30 @@ namespace GameProject
 {
     public class World
     {
-        public Player player;
-        public List<Wall> walls;
+        public List<Basic> entities;
         public World()
         {
-            player = new Player("Black1", new Vector2(200, 200));
-
-            walls = new List<Wall>();
-            walls.Add(new Wall("White2", new Vector2(300, 200)));
+            entities = new List<Basic>();
+            entities.Add(new Player("Black1", new Vector2(610, 360), 2));
+            entities.Add(new Wall("White1", new Vector2(400, 370)));
+            entities.Add(new Wall("White2", new Vector2(300, 300)));
+            entities.Add(new Wall("White2", new Vector2(400, 300)));
         }
 
-        public virtual void Update()
+        public virtual void Update(GameTime gameTime)
         {
-            foreach (var wall in walls)
+            foreach (var entity in entities)
             {
-                wall.Update();
-                CheckPlayerTouching(wall);
+                entity.Update(gameTime,entities);
             }
-            player.Update();
         }
 
         public virtual void Draw()
         {
-            foreach (var wall in walls)
-                wall.Draw();
-            player.Draw();
-        }
-
-        private void CheckPlayerTouching(Wall wall)
-        {
-            player.isTouchRight = player.rectangle.Right + player.speed > wall.rectangle.Left &&
-                player.rectangle.Left < wall.rectangle.Left &&
-                player.rectangle.Bottom > wall.rectangle.Top &&
-                player.rectangle.Top < wall.rectangle.Bottom;
-
-            player.isTouchLeft = player.rectangle.Left - player.speed < wall.rectangle.Right &&
-                player.rectangle.Right > wall.rectangle.Right &&
-                player.rectangle.Bottom > wall.rectangle.Top &&
-                player.rectangle.Top < wall.rectangle.Bottom;
-
-            player.isTouchBottom = player.rectangle.Bottom + player.speed > wall.rectangle.Top &&
-                player.rectangle.Top < wall.rectangle.Top &&
-                player.rectangle.Right > wall.rectangle.Left &&
-                player.rectangle.Left < wall.rectangle.Right;
-
-            player.isTouchTop = player.rectangle.Top - player.speed < wall.rectangle.Bottom &&
-                player.rectangle.Bottom > wall.rectangle.Bottom &&
-                player.rectangle.Right > wall.rectangle.Left &&
-                player.rectangle.Left < wall.rectangle.Right;
+            foreach (var entiry in entities)
+            {
+                entiry.Draw();
+            }
         }
     }
 }

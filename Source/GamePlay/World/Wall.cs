@@ -18,11 +18,11 @@ namespace GameProject
     {
         public Wall(string path, Vector2 pos) : base(path, pos)
         {
-            
+            speed = 0;
         }
-        public override void Update()
+        public override void Update(GameTime gameTime, List<Basic> entities)
         {
-            base.Update();
+            base.Update(gameTime, entities);
         }
 
         public override void Draw()

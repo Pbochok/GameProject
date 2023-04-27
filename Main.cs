@@ -59,7 +59,7 @@ namespace GameProject
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            world.Update();
+            world.Update(gameTime);
 
             base.Update(gameTime);
         }

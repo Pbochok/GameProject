@@ -11,30 +11,26 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
+using System.ComponentModel.DataAnnotations;
 
 namespace GameProject
 {
     public class Player : Basic
     {
-        public int speed = 2;
-        public bool isTouchBottom;
-        public bool isTouchTop;
-        public bool isTouchRight;
-        public bool isTouchLeft;
-
-        public Player(string path, Vector2 pos) : base(path, pos)
+        public Player(string path, Vector2 pos, float speed) : base(path, pos)
         {
-            isTouchBottom = false;
-            isTouchTop = false;
-            isTouchRight = false;
-            isTouchLeft = false;
+            this.speed = speed;
         }
 
-        public override void Update()
+        public override void Update(GameTime gameTime, List<Basic> enities)
         {
             PlayerMovement();
+            CheckCollisions(enities);
 
-            base.Update();
+            pos += velocity;
+            velocity = Vector2.Zero;
+
+            base.Update(gameTime, enities);
         }
 
         public override void Draw()
@@ -44,14 +40,40 @@ namespace GameProject
 
         private void PlayerMovement()
         {
-            if (Keyboard.GetState().IsKeyDown(Keys.A) && !isTouchLeft)
-                pos = new Vector2(pos.X - speed, pos.Y);
-            if (Keyboard.GetState().IsKeyDown(Keys.D) && !isTouchRight)
-                pos = new Vector2(pos.X + speed, pos.Y);
-            if (Keyboard.GetState().IsKeyDown(Keys.W) && !isTouchTop)
-                pos = new Vector2(pos.X, pos.Y - speed);
-            if (Keyboard.GetState().IsKeyDown(Keys.S) && !isTouchBottom)
-                pos = new Vector2(pos.X, pos.Y + speed);
+            if (Keyboard.GetState().IsKeyDown(Keys.A))
+            {
+                velocity.X = -speed;
+            }
+
+            if (Keyboard.GetState().IsKeyDown(Keys.D))
+            {
+                velocity.X = speed;
+            }
+
+            if (Keyboard.GetState().IsKeyDown(Keys.W))
+            {
+                velocity.Y = -speed;
+            }
+
+            if (Keyboard.GetState().IsKeyDown(Keys.S))
+            {
+                velocity.Y = speed;
+            }
+        }
+        private void CheckCollisions(List<Basic> enities)
+        {
+            foreach (var entity in enities)
+            {
+                if (entity == this)
+                    continue;
+                if ((velocity.X > 0 && this.isTouchingLeft(entity)) ||
+                    (velocity.X < 0 && this.IsTouchingRight(entity)))
+                    velocity.X = 0;
+
+                if ((velocity.Y > 0 && this.IsTouchingTop(entity)) ||
+                    (velocity.Y < 0 && this.IsTouchingBottom(entity)))
+                    velocity.Y = 0;
+            }
         }
     }
 }
