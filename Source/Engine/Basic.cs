@@ -74,5 +74,26 @@ namespace GameProject
                    Rectangle.Right > entity.Rectangle.Left &&
                    Rectangle.Left < entity.Rectangle.Right;
         }
+
+        protected void CheckCollisions(List<Basic> enities)
+        {
+            foreach (var entity in enities)
+            {
+                if (entity == this)
+                    continue;
+                if ((velocity.X > 0 && this.isTouchingLeft(entity)) ||
+                    (velocity.X < 0 && this.IsTouchingRight(entity)))
+                    velocity.X = 0;
+
+                if ((velocity.Y > 0 && this.IsTouchingTop(entity)) ||
+                    (velocity.Y < 0 && this.IsTouchingBottom(entity)))
+                    velocity.Y = 0;
+            }
+        }
+        protected void Move()
+        {
+            pos += velocity;
+            velocity = Vector2.Zero;
+        }
     }
 }

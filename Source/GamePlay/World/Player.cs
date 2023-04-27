@@ -27,8 +27,7 @@ namespace GameProject
             PlayerMovement();
             CheckCollisions(enities);
 
-            pos += velocity;
-            velocity = Vector2.Zero;
+            Move();
 
             base.Update(gameTime, enities);
         }
@@ -58,21 +57,6 @@ namespace GameProject
             if (Keyboard.GetState().IsKeyDown(Keys.S))
             {
                 velocity.Y = speed;
-            }
-        }
-        private void CheckCollisions(List<Basic> enities)
-        {
-            foreach (var entity in enities)
-            {
-                if (entity == this)
-                    continue;
-                if ((velocity.X > 0 && this.isTouchingLeft(entity)) ||
-                    (velocity.X < 0 && this.IsTouchingRight(entity)))
-                    velocity.X = 0;
-
-                if ((velocity.Y > 0 && this.IsTouchingTop(entity)) ||
-                    (velocity.Y < 0 && this.IsTouchingBottom(entity)))
-                    velocity.Y = 0;
             }
         }
     }
