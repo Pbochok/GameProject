@@ -16,6 +16,7 @@ namespace GameProject
 {
     public class Basic
     {
+        public string name;
         public Vector2 pos;
         public Texture2D texture;
         public float speed;
@@ -27,10 +28,11 @@ namespace GameProject
                 return new Rectangle((int)pos.X, (int)pos.Y, texture.Width, texture.Height);
             }
         }
-        public Basic(string path, Vector2 pos)
+        public Basic(string path, Vector2 pos, string name)
         {
             this.pos = pos;
             texture = Globals.content.Load<Texture2D>(path);
+            this.name = name;
         }
         public virtual void Update(GameTime gameTime, List<Basic> entities)
         {
@@ -92,7 +94,10 @@ namespace GameProject
         }
         protected void Move()
         {
-            pos += velocity;
+            if(!(pos.X + velocity.X >= World.WorldSize.X || pos.X + velocity.X <= 0))
+                pos.X += velocity.X;
+            if(!(pos.Y + velocity.Y >= World.WorldSize.Y || pos.Y + velocity.Y <= 0))
+                pos.Y += velocity.Y;
             velocity = Vector2.Zero;
         }
     }

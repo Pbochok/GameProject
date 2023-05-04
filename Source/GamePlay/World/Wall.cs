@@ -16,7 +16,7 @@ namespace GameProject
 {
     public class Wall : Basic
     {
-        public Wall(string path, Vector2 pos) : base(path, pos)
+        public Wall(string path, Vector2 pos) : base(path, pos, "Wall")
         {
             speed = 0;
         }

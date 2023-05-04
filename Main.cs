@@ -28,6 +28,10 @@ namespace GameProject
         private GraphicsDeviceManager _graphics;
 
         World world;
+        Camera camera;
+
+        public static int ScreenWidth = 1280;
+        public static int ScreenHeight = 720;
 
         public Main()
         {
@@ -39,8 +43,8 @@ namespace GameProject
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            _graphics.PreferredBackBufferWidth = 1280;
-            _graphics.PreferredBackBufferHeight = 720;
+            _graphics.PreferredBackBufferWidth = ScreenWidth;
+            _graphics.PreferredBackBufferHeight = ScreenHeight;
             _graphics.ApplyChanges();
             base.Initialize();
         }
@@ -50,6 +54,7 @@ namespace GameProject
             Globals.content = Content;
             Globals.spriteBatch = new SpriteBatch(GraphicsDevice);
             world = new World();
+            camera = new Camera();
             
             // TODO: use this.Content to load your game content here
         }
@@ -60,7 +65,8 @@ namespace GameProject
                 Exit();
 
             world.Update(gameTime);
-
+            camera.Follow(world.player);
+            
             base.Update(gameTime);
         }
 
@@ -68,7 +74,7 @@ namespace GameProject
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            Globals.spriteBatch.Begin();
+            Globals.spriteBatch.Begin(transformMatrix: camera.Transform);
 
             world.Draw();
 

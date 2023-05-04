@@ -17,19 +17,20 @@ namespace GameProject
 {
     public class Enemy : Basic
     {
-        private Player target;
+        private Map map;
         private bool trigerred;
         private Vector2 vectorToTarget;
-        public Enemy(string path, Vector2 pos, float speed, Player target) : base(path, pos)
+        public Enemy(string path, Vector2 pos, float speed, Map map) : base(path, pos, "Enemy")
         {
             this.speed = speed;
-            this.target = target;
+            this.map = map;
         }
 
         public override void Update(GameTime gameTime, List<Basic> entities)
         {
-            vectorToTarget = target.pos - this.pos;
-            EnemyMovement(target);
+            vectorToTarget = map.target.pos - this.pos;
+
+            EnemyMovement(map.target);
             CheckCollisions(entities);
 
             Move();
@@ -65,6 +66,11 @@ namespace GameProject
                 else
                     velocity.Y = speed;
             }
+        }
+
+        private void FindPathToTarget()
+        {
+
         }
     }
 }

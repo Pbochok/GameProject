@@ -17,7 +17,7 @@ namespace GameProject
 {
     public class Player : Basic
     {
-        public Player(string path, Vector2 pos, float speed) : base(path, pos)
+        public Player(string path, Vector2 pos, float speed) : base(path, pos, "Player")
         {
             this.speed = speed;
         }

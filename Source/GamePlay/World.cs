@@ -18,16 +18,24 @@ namespace GameProject
     {
         public Player player;
         public List<Basic> entities;
+        public static Vector2 WorldSize = new Vector2(1000, 1000);
+        public Map map;
+
         public World()
         {
-            player = new Player("Black1", new Vector2(610, 360), 3);
-            var enemy = new Enemy("Enemy1", new Vector2(900, 100), 2, player);
             entities = new List<Basic>();
+
+            player = new Player("Black2", new Vector2(610, 360), 2);
+
             entities.Add(player);
+            entities.Add(new Wall("White3", new Vector2(400, 370)));
+            entities.Add(new Wall("White3", new Vector2(300, 300)));
+            entities.Add(new Wall("White3", new Vector2(332, 300)));
+
+            map = new Map(entities, player);
+            var enemy = new Enemy("Enemy1", new Vector2(900, 100), 1, map);
+
             entities.Add(enemy);
-            entities.Add(new Wall("White1", new Vector2(400, 370)));
-            entities.Add(new Wall("White2", new Vector2(300, 300)));
-            entities.Add(new Wall("White2", new Vector2(400, 300)));
         }
 
         public virtual void Update(GameTime gameTime)
@@ -35,6 +43,8 @@ namespace GameProject
             foreach (var entity in entities)
             {
                 entity.Update(gameTime,entities);
+                if (entity.name == "Player")
+                    map.MapTargetUpdate((Player)entity);
             }
         }
 

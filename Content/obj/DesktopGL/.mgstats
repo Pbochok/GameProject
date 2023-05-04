@@ -1,5 +1,7 @@
 Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
-"F:/Прога/Игра/GameProject/Content/Black1.png","F:/Прога/Игра/GameProject/Content/bin/DesktopGL/Black1.xnb","TextureProcessor","Texture2DContent",627,7285,0,0791264
-"F:/Прога/Игра/GameProject/Content/Enemy1.png","F:/Прога/Игра/GameProject/Content/bin/DesktopGL/Enemy1.xnb","TextureProcessor","Texture2DContent",568,4181,0,0012017
-"F:/Прога/Игра/GameProject/Content/White1.png","F:/Прога/Игра/GameProject/Content/bin/DesktopGL/White1.xnb","TextureProcessor","Texture2DContent",620,7285,0,0007364
-"F:/Прога/Игра/GameProject/Content/White2.png","F:/Прога/Игра/GameProject/Content/bin/DesktopGL/White2.xnb","TextureProcessor","Texture2DContent",733,16085,0,0010286
+"F:/Прога/Игра/GameProject/Content/Black1.png","F:/Прога/Игра/GameProject/Content/bin/DesktopGL/Black1.xnb","TextureProcessor","Texture2DContent",627,7285,0,070079
+"F:/Прога/Игра/GameProject/Content/Black2.png","F:/Прога/Игра/GameProject/Content/bin/DesktopGL/Black2.xnb","TextureProcessor","Texture2DContent",566,4181,0,0060956
+"F:/Прога/Игра/GameProject/Content/Enemy1.png","F:/Прога/Игра/GameProject/Content/bin/DesktopGL/Enemy1.xnb","TextureProcessor","Texture2DContent",568,4181,0,0008656
+"F:/Прога/Игра/GameProject/Content/White1.png","F:/Прога/Игра/GameProject/Content/bin/DesktopGL/White1.xnb","TextureProcessor","Texture2DContent",620,7285,0,0009955
+"F:/Прога/Игра/GameProject/Content/White2.png","F:/Прога/Игра/GameProject/Content/bin/DesktopGL/White2.xnb","TextureProcessor","Texture2DContent",733,16085,0,0009538
+"F:/Прога/Игра/GameProject/Content/White3.png","F:/Прога/Игра/GameProject/Content/bin/DesktopGL/White3.xnb","TextureProcessor","Texture2DContent",560,4181,0,0009131

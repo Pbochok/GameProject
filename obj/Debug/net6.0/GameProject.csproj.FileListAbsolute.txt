@@ -27,3 +27,5 @@ F:\Прога\Игра\GameProject\bin\Debug\net6.0\Content\Black1.xnb
 F:\Прога\Игра\GameProject\bin\Debug\net6.0\Content\White1.xnb
 F:\Прога\Игра\GameProject\bin\Debug\net6.0\Content\White2.xnb
 F:\Прога\Игра\GameProject\bin\Debug\net6.0\Content\Enemy1.xnb
+F:\Прога\Игра\GameProject\bin\Debug\net6.0\Content\Black2.xnb
+F:\Прога\Игра\GameProject\bin\Debug\net6.0\Content\White3.xnb
