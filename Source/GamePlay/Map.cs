@@ -14,36 +14,35 @@ using Microsoft.Xna.Framework.Media;
 
 namespace GameProject
 {
-    public enum MapCell
-    {
-        Empty,
-        Wall
-    };
-
     public class Map
     {
-        public MapCell[,] map;
+        public Chunk[,] chunkMap;
+        public Chunk targetChunk;
         public Player target;
 
         public Map(List<Basic> entities, Player target)
         {
-            map = FillMap(entities);
+            chunkMap = FillMap(entities);
+            var targetChunkPos = Chunk.GetChunkPos(target.pos);
+            targetChunk = chunkMap[targetChunkPos.Item1,targetChunkPos.Item2];
             this.target = target;
         }
 
         public void MapTargetUpdate(Player updTarget)
         {
-            target = updTarget;
+            targetChunk = chunkMap[(int)updTarget.pos.X / Chunk.Size, (int)updTarget.pos.Y / Chunk.Size];
         }
 
-        public MapCell[,] FillMap(List<Basic> entities)
+        public Chunk[,] FillMap(List<Basic> entities)
         {
-            var map = new MapCell[(int)World.WorldSize.X, (int)World.WorldSize.Y];
-            for (int i = 0; i < map.GetLength(0); i++)
+            var worldSizeInChunks = (int)World.Size.X / Chunk.Size;
+            var map = new Chunk[worldSizeInChunks, worldSizeInChunks];
+
+            for (int i = 0; i < worldSizeInChunks; i++)
             {
-                for (int j = 0; j < map.GetLength(1); j++)
+                for (int j = 0; j < worldSizeInChunks; j++)
                 {
-                    map[i, j] = MapCell.Empty;
+                    map[i, j] = new Chunk(new Vector2(i * Chunk.Size, j * Chunk.Size), Chunk.State.Empty);
                 }
             }
 
@@ -51,14 +50,9 @@ namespace GameProject
             {
                 if (entity.name != "Wall")
                     continue;
-                for (int i = (int)entity.pos.X; i < entity.Rectangle.Right; i++)
-                {
-                    for (int j = (int)entity.pos.Y; j < entity.Rectangle.Bottom; j++)
-                    {
-                        map[i, j] = MapCell.Wall;
-                    }
-                }
+                map[(int)entity.pos.X / Chunk.Size ,(int)entity.pos.Y / Chunk.Size].state = Chunk.State.Wall;
             }
+
             return map;
         }
     }

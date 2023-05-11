@@ -21,6 +21,13 @@ namespace GameProject
         public Texture2D texture;
         public float speed;
         public Vector2 velocity;
+        public Vector2 ChunkPos
+        {
+            get
+            {
+                return new Vector2(Chunk.GetChunkPos(pos).Item1, Chunk.GetChunkPos(pos).Item2);
+            }
+        }
         public Rectangle Rectangle
         {
             get
@@ -94,9 +101,9 @@ namespace GameProject
         }
         protected void Move()
         {
-            if(!(pos.X + velocity.X >= World.WorldSize.X || pos.X + velocity.X <= 0))
+            if(!(pos.X + velocity.X >= World.Size.X || pos.X + velocity.X <= 0))
                 pos.X += velocity.X;
-            if(!(pos.Y + velocity.Y >= World.WorldSize.Y || pos.Y + velocity.Y <= 0))
+            if(!(pos.Y + velocity.Y >= World.Size.Y || pos.Y + velocity.Y <= 0))
                 pos.Y += velocity.Y;
             velocity = Vector2.Zero;
         }
